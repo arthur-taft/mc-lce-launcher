@@ -9,7 +9,6 @@ fi
 
 EXE_DOWNLOAD="https://github.com/smartcmd/MinecraftConsoles/releases/download/nightly/Minecraft.Client.exe"
 ZIP_DOWNLOAD="https://github.com/smartcmd/MinecraftConsoles/releases/download/nightly/LCEWindows64.zip"
-PDB_DOWNLOAD="https://github.com/smartcmd/MinecraftConsoles/releases/download/nightly/Minecraft.Client.pdb"
 INSTALL_LOCATION=${INSTALL_LOCATION:-"$HOME/games/minecraft-lce"}
 COMPAT_TOOL=${COMPAT_TOOL:-"/usr/bin/wine"}
 GAME_INSTALLED=${GAME_INSTALLED:-false}
@@ -22,11 +21,11 @@ checkGameInstalled() {
     while :; do
         read -p "Do you have the game installed? (y/N): " user_game_installed
         user_game_installed=${user_game_installed:-"n"}
-        if [ "${user_game_installed,,}" == "y" ] || [ "${user_game_installed,,}" == "n" ]; then
-            break
-        else
-            echo "Response must be Y or N!"
-        fi
+
+        case "${user_game_installed,,}" in
+            y|n) break ;;
+            *) echo "Response must be Y or N!" ;;
+        esac
     done
 
     case "$user_game_installed" in
@@ -48,15 +47,9 @@ findGameInstall() {
         install_input_verify=${install_input_verify:-"y"}
 
         case "$install_input_verify" in
-            y)
-                break
-                ;;
-            n)
-                continue
-                ;;
-            *)
-                echo "Response must be Y or N!"
-                ;;
+            y) break ;;
+            n) continue ;;
+            *) echo "Response must be Y or N!" ;;
         esac
     done
 
@@ -116,15 +109,9 @@ installGame() {
         install_input_verify=${install_input_verify:-"y"}
 
         case "$install_input_verify" in
-            y)
-                break
-                ;;
-            n)
-                continue
-                ;;
-            *)
-                echo "Response must be Y or N!"
-                ;;
+            y) break ;;
+            n) continue ;;
+            *) echo "Response must be Y or N!" ;;
         esac
     done
 
@@ -153,17 +140,10 @@ setUsername() {
         read -rp "Is this correct?: $username (Y/n): " username_verify
         username_verify=${username_verify:-"y"}
         
-
         case "$username_verify" in
-            y)
-                break
-                ;;
-            n)
-                continue
-                ;;
-            *)
-                echo "Response must be Y or N!"
-                ;;
+            y) break ;;
+            n) continue ;;
+            *) echo "Response must be Y or N!" ;;
         esac
     done
     
